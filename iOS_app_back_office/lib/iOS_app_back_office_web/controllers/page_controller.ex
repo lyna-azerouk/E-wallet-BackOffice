@@ -9,7 +9,10 @@ defmodule IOSAppBackOfficeWeb.PageController do
     # The home page is often custom made,
     # so skip the default app layout.
     users = Repo.all(User)
-    IO.inspect(users)
+
+    users_with_wallets = Repo.preload(users, :wallets)
+
+    IO.inspect(users_with_wallets)
     render(conn, :home, layout: false)
   end
 end
