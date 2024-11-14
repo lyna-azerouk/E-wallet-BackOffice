@@ -18,7 +18,12 @@ defmodule IOSAppBackOfficeWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    get "/users", PageController, :home
+  end
+
+  scope "/admin", IOSAppBackOfficeWeb do
+    pipe_through :browser
+
+    get "/login", AdminController, :login
   end
 
   # Other scopes may use custom stacks.
