@@ -14,16 +14,15 @@ defmodule IOSAppBackOfficeWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", IOSAppBackOfficeWeb do
-    pipe_through :browser
-
-    get "/", PageController, :home
-  end
-
   scope "/admin", IOSAppBackOfficeWeb do
     pipe_through :browser
 
-    get "/login", AdminController, :login
+    get "/login", AdminController, :show
+    post "/login", AdminController, :login
+
+    live_session :default do
+      live "/profile", AdminProfileLive, :index
+    end
   end
 
   # Other scopes may use custom stacks.

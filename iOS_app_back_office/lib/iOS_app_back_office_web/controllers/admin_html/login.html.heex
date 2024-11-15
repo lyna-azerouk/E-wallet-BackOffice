@@ -17,12 +17,13 @@
           <p class="mt-1.5 text-sm font-medium text-white/50">Welcome back, enter your credentials to continue.</p>
         </div>
           <div class="p-6 pt-0">
-            <form>
+            <form action="/admin/login" method="post">
+              <input type="hidden"  name="_csrf_token" value={Phoenix.Controller.get_csrf_token()}>
               <div>
                 <div>
                   <div class="group relative rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
                     <div class="flex justify-between">
-                      <label class="text-xs font-medium text-muted-foreground group-focus-within:text-white text-gray-400">Username</label>
+                      <label class="text-xs font-medium text-muted-foreground group-focus-within:text-white text-gray-400">Email</label>
                       <div class="absolute right-3 translate-y-2 text-green-200">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                           fill="currentColor" class="w-6 h-6">
@@ -32,7 +33,7 @@
                         </svg>
                       </div>
                     </div>
-                    <input type="text" name="username" placeholder="Username"
+                    <input type="text" name="email" placeholder="email"
                       autocomplete="off"
                       class="block w-full border-0 bg-transparent p-0 text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground">
                   </div>
@@ -60,7 +61,7 @@
               <div class="mt-4 flex items-center justify-end gap-x-2">
                 <button
                   class="font-semibold hover:bg-black hover:text-white hover:ring hover:ring-white transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-customBlue text-black h-10 px-4 py-2 "
-                  type="submit">Log in
+                  type="submit" phx-click="button_login">Log in
                 </button>
               </div>
             </form>
