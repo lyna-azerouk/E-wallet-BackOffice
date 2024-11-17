@@ -1,6 +1,4 @@
 defmodule IOSAppBackOffice.Admin do
-  import Bcrypt
-
   use Ecto.Schema
 
   schema "admin" do

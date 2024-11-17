@@ -28,5 +28,5 @@ defmodule IOSAppBackOffice.Accounts do
     Bcrypt.verify_pass(password, hashed_password)
   end
 
-  defp compare_password(_, password), do: {:error, :admin_not_found}
+  defp compare_password(_, _password), do: {:error, :admin_not_found}
 end

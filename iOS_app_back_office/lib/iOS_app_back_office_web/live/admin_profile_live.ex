@@ -12,6 +12,7 @@ defmodule IOSAppBackOfficeWeb.AdminProfileLive do
     {:ok, socket}
   end
 
+  @impl true
   def handle_params( _ , _ , socket) do
     users_paginated = Users.paginate_users()
 
@@ -21,6 +22,7 @@ defmodule IOSAppBackOfficeWeb.AdminProfileLive do
     {:noreply, socket}
   end
 
+  @impl true
   def handle_event("nav", %{"page" => page}, socket) do
     users_paginated = Users.paginate_users(page: page)
 
@@ -29,6 +31,7 @@ defmodule IOSAppBackOfficeWeb.AdminProfileLive do
     {:noreply, socket}
   end
 
+  @impl true
   def render(assigns) do
   ~H"""
     <div class="overflow-y-hidden rounded-lg border p-10">
