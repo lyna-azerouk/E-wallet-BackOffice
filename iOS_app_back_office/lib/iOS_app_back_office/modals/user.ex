@@ -1,6 +1,7 @@
 defmodule IOSAppBackOffice.User do
   use Ecto.Schema
   alias IOSAppBackOffice.Wallet
+  alias IOSAppBackOffice.Address
 
   schema "users" do
     field :email, :string

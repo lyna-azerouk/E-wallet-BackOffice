@@ -1,4 +1,4 @@
-defmodule IOSAppBackOfficeWeb.CustomComponenet do
+defmodule IOSAppBackOfficeWeb.CustomComponenetLive do
   use IOSAppBackOfficeWeb, :html
 
   def user_resume(assigns) do
@@ -21,8 +21,7 @@ defmodule IOSAppBackOfficeWeb.CustomComponenet do
           <p class="whitespace-no-wrap">Active</p>
         </td>
         <td class="w-1/12 whitespace-no-wrap">
-          <span class="text-sm mr-1"> Show </span>
-          <span class="text-sm mr-1"> Link </span>
+          <.link class="text-sm mr-1" navigate={~p"/admin/users/#{@user.id}"}> Show </.link>
         </td>
       </tbody>
     """

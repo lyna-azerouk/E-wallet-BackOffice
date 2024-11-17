@@ -11,4 +11,13 @@ defmodule IOSAppBackOffice.Users do
     User
     |> Repo.paginate(params)
   end
+
+  def get_user(id) when is_binary(id) do
+    User
+    |> Repo.get_by(id: String.to_integer(id))
+    |> Repo.preload(:wallets)
+    |> Repo.preload(:address)
+  end
+
+  def get(_), do: nil
 end

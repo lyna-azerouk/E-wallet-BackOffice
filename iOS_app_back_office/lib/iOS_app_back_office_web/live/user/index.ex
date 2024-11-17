@@ -1,6 +1,6 @@
-defmodule IOSAppBackOfficeWeb.AdminProfileLive do
+defmodule IOSAppBackOfficeWeb.UserIndexLive do
   use IOSAppBackOfficeWeb, :live_view
-  import IOSAppBackOfficeWeb.CustomComponenet
+  import IOSAppBackOfficeWeb.CustomComponenetLive
 
   alias  IOSAppBackOffice.Users
 

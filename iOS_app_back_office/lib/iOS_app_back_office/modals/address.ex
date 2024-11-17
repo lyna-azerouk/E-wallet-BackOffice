@@ -1,7 +1,7 @@
 defmodule IOSAppBackOffice.Address do
   use Ecto.Schema
 
-  schema "adsress" do
+  schema "addresses" do
     field :country, :string
     field :city, :string
     field :region, :string

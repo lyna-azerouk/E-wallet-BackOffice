@@ -20,7 +20,8 @@ defmodule IOSAppBackOfficeWeb.Router do
     get "/login", AdminController, :show
     post "/login", AdminController, :login
 
-    live "/profile", AdminProfileLive, :index, as: :admin_profile
+    live "/users", UserIndexLive, :index
+    live "/users/:id", UserShowLive, :show
   end
 
   # Other scopes may use custom stacks.

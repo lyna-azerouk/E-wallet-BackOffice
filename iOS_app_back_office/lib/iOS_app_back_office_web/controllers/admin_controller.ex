@@ -12,7 +12,7 @@ defmodule IOSAppBackOfficeWeb.AdminController do
     case Accounts.compare_credentials(params) do
       {:ok, admin} -> conn
         |> put_session(:admin, admin)
-        |> redirect( to: "/admin/profile")
+        |> redirect( to: "admin/users")
 
       {:error, _} -> conn
                     |> put_flash(:error, "Error while login")
