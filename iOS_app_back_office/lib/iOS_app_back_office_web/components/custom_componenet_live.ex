@@ -3,27 +3,27 @@ defmodule IOSAppBackOfficeWeb.CustomComponenetLive do
 
   def user_resume(assigns) do
     ~H"""
-      <tbody class ="text-gray-500">
-        <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-          <p class="whitespace-no-wrap"> <%= @user.id %> </p>
-        </td>
-        <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-          <div class="flex items-center">
-            <div class="ml-3">
-              <p class="whitespace-no-wrap"> <%= @user.email %> </p>
-            </div>
+    <tbody class ="text-gray-500">
+      <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+        <p class="whitespace-no-wrap"> <%= @user.id %> </p>
+      </td>
+      <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+        <div class="flex items-center">
+          <div class="ml-3">
+            <p class="whitespace-no-wrap"> <%= @user.email %> </p>
           </div>
-        </td>
-        <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-          <p class="whitespace-no-wrap">Administrator</p>
-        </td>
-        <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-          <p class="whitespace-no-wrap">Active</p>
-        </td>
-        <td class="w-1/12 whitespace-no-wrap">
-          <.link class="text-sm mr-1" navigate={~p"/admin/users/#{@user.id}"}> Show </.link>
-        </td>
-      </tbody>
+        </div>
+      </td>
+      <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+        <p class="whitespace-no-wrap">Administrator</p>
+      </td>
+      <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+        <p class="whitespace-no-wrap">Active</p>
+      </td>
+      <td class="w-1/12 whitespace-no-wrap">
+        <.link class="text-sm mr-1" navigate={~p"/admin/users/#{@user.id}"}> Show </.link>
+      </td>
+    </tbody>
     """
   end
 
@@ -34,10 +34,16 @@ defmodule IOSAppBackOfficeWeb.CustomComponenetLive do
           <%= @property %>
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
-          <%= @value %>
+          <%= if @edit_property && @property_name_to_edit == @property do %>
+            <input type="text" value={@value} phx-blur="save_property" phx-change="save_property" class="border rounded px-2" phx-value-property_name={@property} />
+          <% else %>
+            <%= @value %>
+          <% end %>
         </dd>
         <dd class="flex justify-end items-center">
-          <Heroicons.icon name="pencil-square" type="outline" class="h-4 w-4" />
+         <button phx-click="edit_property", phx-value-property_name_to_edit={@property}>
+           <Heroicons.icon name="pencil-square" type="outline" class="h-4 w-4 text-blue-500" />
+        </button>
         </dd>
       </div>
     """

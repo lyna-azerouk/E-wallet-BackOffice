@@ -19,5 +19,11 @@ defmodule IOSAppBackOffice.Users do
     |> Repo.preload(:address)
   end
 
-  def get(_), do: nil
+  def get_user(_), do: nil
+
+  def update_user(%User{id: id} = user, params) when not is_nil(id) do
+    user
+    |> User.changeset(params)
+    |> Repo.update()
+  end
 end
