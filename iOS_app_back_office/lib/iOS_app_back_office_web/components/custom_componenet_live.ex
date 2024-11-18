@@ -26,4 +26,20 @@ defmodule IOSAppBackOfficeWeb.CustomComponenetLive do
       </tbody>
     """
   end
+
+  def user_ligne_show(assigns) do
+    ~H"""
+      <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          <%= @property %>
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
+          <%= @value %>
+        </dd>
+        <dd class="flex justify-end items-center">
+          <Heroicons.icon name="pencil-square" type="outline" class="h-4 w-4" />
+        </dd>
+      </div>
+    """
+  end
 end

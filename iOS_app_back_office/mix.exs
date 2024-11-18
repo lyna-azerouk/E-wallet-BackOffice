@@ -61,7 +61,7 @@ defmodule IOSAppBackOffice.MixProject do
       {:bandit, "~> 1.5"},
       {:bcrypt_elixir, "~> 3.0"},
       {:ex_heroicons, "~> 3.0.0"},
-      {:scrivener_ecto, "~> 2.7"}
+      {:scrivener_ecto, "~> 2.7"},
     ]
   end
 
@@ -75,7 +75,7 @@ defmodule IOSAppBackOffice.MixProject do
     [
       setup: ["deps.get", "ecto.setup", "assets.setup", "assets.build"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
+
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind iOS_app_back_office", "esbuild iOS_app_back_office"],
