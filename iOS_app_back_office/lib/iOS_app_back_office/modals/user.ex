@@ -12,6 +12,7 @@ defmodule IOSAppBackOffice.User do
     field :dwolla_id, :string
     field :first_name, :string
     field :last_name, :string
+    field :state, :string
     field :date_of_birth, :date
 
     belongs_to :address, Address

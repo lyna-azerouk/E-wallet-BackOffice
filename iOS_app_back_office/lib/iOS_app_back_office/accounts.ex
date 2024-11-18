@@ -1,6 +1,4 @@
 defmodule IOSAppBackOffice.Accounts do
-  import Bcrypt
-
   alias IOSAppBackOffice.Admin
   alias IOSAppBackOffice.Repo
 

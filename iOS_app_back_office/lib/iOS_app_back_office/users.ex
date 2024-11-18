@@ -1,5 +1,6 @@
 defmodule IOSAppBackOffice.Users do
 
+  alias Hex.API.User
   alias IOSAppBackOffice.Repo
   alias IOSAppBackOffice.User
 
@@ -25,5 +26,10 @@ defmodule IOSAppBackOffice.Users do
     user
     |> User.changeset(params)
     |> Repo.update()
+  end
+
+  def delete_user(%User{id: id} = user) when not is_nil(id) do
+    user
+    |> Repo.delete()
   end
 end

@@ -17,8 +17,10 @@ defmodule IOSAppBackOfficeWeb.CustomComponenetLive do
       <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
         <p class="whitespace-no-wrap">Administrator</p>
       </td>
-      <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-        <p class="whitespace-no-wrap">Active</p>
+      <td class="border-b border-gray-200 bg-white px-5 py-3 text-sm">
+        <p class="whitespace-no-wrap">
+         <.badge state={@user.state}/>
+        </p>
       </td>
       <td class="w-1/12 whitespace-no-wrap">
         <.link class="text-sm mr-1" navigate={~p"/admin/users/#{@user.id}"}> Show </.link>
@@ -29,13 +31,13 @@ defmodule IOSAppBackOfficeWeb.CustomComponenetLive do
 
   def user_ligne_show(assigns) do
     ~H"""
-      <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <div class="py-2 sm:py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dt class="text-sm font-medium text-gray-500">
           <%= @property %>
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
           <%= if @edit_property && @property_name_to_edit == @property do %>
-            <input type="text" value={@value} phx-blur="save_property" phx-change="save_property" class="border rounded px-2" phx-value-property_name={@property} />
+            <input type="text" value={@value} phx-blur="save_property" phx-change="save_property" class="border-gray-300 rounded-md px-2 shadow-md" phx-value-property_name={@property} />
           <% else %>
             <%= @value %>
           <% end %>
@@ -48,4 +50,21 @@ defmodule IOSAppBackOfficeWeb.CustomComponenetLive do
       </div>
     """
   end
+
+  def badge(assigns) do
+    ~H"""
+    <p class={badge_class(@state)} aria-label={"State badge for #{@state}"}>
+      <%= @state %>
+    </p>
+    """
+  end
+
+  defp badge_class(state) do
+    base_classes = "w-24 h-8 rounded-md flex items-center justify-center text-white p-2"
+    color_classes = color_class(state)
+    "#{base_classes} #{color_classes}"
+  end
+
+  defp color_class("verified"), do: "bg-green-400"
+  defp color_class("suspended"), do: "bg-red-600"
 end
