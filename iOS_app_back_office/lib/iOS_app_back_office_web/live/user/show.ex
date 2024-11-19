@@ -101,6 +101,7 @@ defmodule IOSAppBackOfficeWeb.UserShowLive do
 
   def render(%{user: user} = assigns) when not is_nil(user) do
     ~H"""
+    <.navbar/>
     <div class="p-6">
       <div class="bg-white shadow-lg rounded-lg border w-1/2 p-4">
         <div class="px-4 py-4 sm:px-6 flex items-center justify-between">
