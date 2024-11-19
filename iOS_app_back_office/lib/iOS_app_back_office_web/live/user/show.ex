@@ -26,7 +26,7 @@ defmodule IOSAppBackOfficeWeb.UserShowLive do
 
   def handle_event(
         "save_property",
-        %{"property_name" => property_name, "value" => value} = params,
+        %{"property_name" => property_name, "value" => value},
         socket
       ) do
     socket =
@@ -62,6 +62,39 @@ defmodule IOSAppBackOfficeWeb.UserShowLive do
         _ ->
           socket
           |> put_flash(:info, "Error while deleting the user")
+      end
+
+    {:noreply, socket}
+  end
+
+  def handle_event("suspended", _, socket) do
+    socket =
+      socket.assigns.user
+      |> Users.update_user_state("suspended")
+      |> case do
+        {:ok, user} ->
+          socket |> assign(:user, user)
+
+        {:error, _} ->
+          socket
+          |> put_flash(:error, "an error accured while updating the user state")
+      end
+
+    {:noreply, socket}
+  end
+
+
+  def handle_event("desactivated", _, socket) do
+    socket =
+      socket.assigns.user
+      |> Users.update_user_state("desactivated")
+      |> case do
+        {:ok, user} ->
+          socket |> assign(:user, user)
+
+        {:error, _} ->
+          socket
+          |> put_flash(:error, "an error accured while updating the user state")
       end
 
     {:noreply, socket}
@@ -129,18 +162,16 @@ defmodule IOSAppBackOfficeWeb.UserShowLive do
         <div class="border-t border-gray-200 px-4 py-2 sm:p-0 justify-between flex">
           <button
             type="button"
+            phx-click="suspended"
             class="bg-red-400 hover:bg-red-600 text-white font-medium py-2 px-2 rounded-md shadow-md flex items-center transition duration-300 ease-in-out mt-2"
           >
             Suspend User
           </button>
           <button
             type="button"
-            class="bg-green-400 hover:bg-red-600 text-white font-medium py-2 px-2 rounded-md shadow-md flex items-center transition duration-300 ease-in-out mt-2"
-          >
-            Verify User
-          </button>
-          <button
-            type="button"
+            ,
+            phx-click="desactivated"
+            ,
             class="bg-blue-400 hover:bg-red-600 text-white font-medium py-2 px-2 rounded-md shadow-md flex items-center transition duration-300 ease-in-out mt-2"
           >
             Deactivate User

@@ -1,6 +1,4 @@
 defmodule IOSAppBackOffice.Services.Dwolla.Client do
-  alias __MODULE__
-
   @type t :: %__MODULE__{}
   defstruct api_base_url: nil,
             headers: nil,

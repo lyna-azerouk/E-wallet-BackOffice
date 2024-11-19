@@ -2,6 +2,7 @@ defmodule IOSAppBackOffice.Users do
   alias Hex.API.User
   alias IOSAppBackOffice.Repo
   alias IOSAppBackOffice.User
+  alias IOSAppBackOffice.Services.Dwolla.Dwolla
 
   def get_users() do
     User |> Repo.all()
@@ -32,21 +33,33 @@ defmodule IOSAppBackOffice.Users do
     |> Repo.delete()
   end
 
-  def update_user_state(%User{} = user, "suspended") do
+  def update_user_state(%User{} = user, "suspended" = state) do
     user
-    |> User.changeset(%{state: "suspended"})
-    |> Repo.update()
+    |> Dwolla.update_custumer_state(state)
+    |> case do
+      {:ok, %User{} = user_reponse} ->
+        user_reponse
+
+        |> User.changeset(%{state: state})
+        |> Repo.update()
+
+      {:error, _} = error ->
+        error
+    end
   end
 
-  def update_user_state(%User{} = user, "deactivated") do
+  def update_user_state(%User{} = user, "desactivated" = state) do
     user
-    |> User.changeset(%{state: "deactivated"})
-    |> Repo.update()
-  end
+    |> Dwolla.update_custumer_state(state)
+    |> case do
+      {:ok, %User{} = user} ->
+        user
 
-  def update_user_state(%User{} = user, "verified") do
-    user
-    |> User.changeset(%{state: "verified"})
-    |> Repo.update()
+        |> User.changeset(%{state: state})
+        |> Repo.update()
+
+      {:error, _} = error ->
+        error
+    end
   end
 end

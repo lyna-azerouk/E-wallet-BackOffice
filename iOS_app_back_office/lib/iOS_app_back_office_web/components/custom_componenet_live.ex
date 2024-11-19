@@ -74,5 +74,6 @@ defmodule IOSAppBackOfficeWeb.CustomComponenetLive do
 
   defp color_class("verified"), do: "bg-green-400"
   defp color_class("suspended"), do: "bg-red-600"
+  defp color_class("desactivated"), do: "bg-gray-200"
   defp color_class(nil), do: "-"
 end
