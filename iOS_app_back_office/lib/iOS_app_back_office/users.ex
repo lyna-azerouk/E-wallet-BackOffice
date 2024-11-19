@@ -24,8 +24,16 @@ defmodule IOSAppBackOffice.Users do
 
   def update_user(%User{id: id} = user, params) when not is_nil(id) do
     user
-    |> User.changeset(params)
-    |> Repo.update()
+    |> Dwolla.update_user(params)
+    |> case do
+      {:ok, %User{}} ->
+        user
+        |> User.changeset(params)
+        |> Repo.update()
+
+      {:error, _} ->
+        {:error, "Error occured while updating the user"}
+    end
   end
 
   def delete_user(%User{id: id} = user) when not is_nil(id) do
@@ -37,9 +45,8 @@ defmodule IOSAppBackOffice.Users do
     user
     |> Dwolla.update_custumer_state(state)
     |> case do
-      {:ok, %User{} = user_reponse} ->
-        user_reponse
-
+      {:ok, %User{} = user} ->
+        user
         |> User.changeset(%{state: state})
         |> Repo.update()
 
@@ -54,7 +61,6 @@ defmodule IOSAppBackOffice.Users do
     |> case do
       {:ok, %User{} = user} ->
         user
-
         |> User.changeset(%{state: state})
         |> Repo.update()
 

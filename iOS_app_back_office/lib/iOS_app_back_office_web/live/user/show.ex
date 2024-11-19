@@ -77,12 +77,11 @@ defmodule IOSAppBackOfficeWeb.UserShowLive do
 
         {:error, _} ->
           socket
-          |> put_flash(:error, "an error accured while updating the user state")
+          |> put_flash(:error, "An error accured while updating the user state")
       end
 
     {:noreply, socket}
   end
-
 
   def handle_event("desactivated", _, socket) do
     socket =
@@ -94,7 +93,7 @@ defmodule IOSAppBackOfficeWeb.UserShowLive do
 
         {:error, _} ->
           socket
-          |> put_flash(:error, "an error accured while updating the user state")
+          |> put_flash(:error, "An error accured while updating the user state")
       end
 
     {:noreply, socket}

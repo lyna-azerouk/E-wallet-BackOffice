@@ -15,7 +15,7 @@ defmodule IOSAppBackOffice.User do
     field :state, :string
     field :date_of_birth, :date
 
-    belongs_to :address, Address
+    belongs_to :address, Address, on_replace: :update
     has_many :wallets, Wallet
   end
 
