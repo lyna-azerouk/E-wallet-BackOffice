@@ -7,16 +7,17 @@ defmodule IOSAppBackOfficeWeb.AdminController do
     render(conn, :login, layout: false)
   end
 
-  def login(conn, %{"email"=> _email, "password"=> _password} = params) do
-
+  def login(conn, %{"email" => _email, "password" => _password} = params) do
     case Accounts.compare_credentials(params) do
-      {:ok, admin} -> conn
+      {:ok, admin} ->
+        conn
         |> put_session(:admin, admin)
-        |> redirect( to: "/admin/users")
+        |> redirect(to: "/admin/users")
 
-      {:error, _} -> conn
-                    |> put_flash(:error, "Error while login")
-                    |> render(:login)
+      {:error, _} ->
+        conn
+        |> put_flash(:error, "Error while login")
+        |> render(:login)
     end
   end
 end

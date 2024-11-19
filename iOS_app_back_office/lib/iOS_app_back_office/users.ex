@@ -1,5 +1,4 @@
 defmodule IOSAppBackOffice.Users do
-
   alias Hex.API.User
   alias IOSAppBackOffice.Repo
   alias IOSAppBackOffice.User
@@ -31,5 +30,23 @@ defmodule IOSAppBackOffice.Users do
   def delete_user(%User{id: id} = user) when not is_nil(id) do
     user
     |> Repo.delete()
+  end
+
+  def update_user_state(%User{} = user, "suspended") do
+    user
+    |> User.changeset(%{state: "suspended"})
+    |> Repo.update()
+  end
+
+  def update_user_state(%User{} = user, "deactivated") do
+    user
+    |> User.changeset(%{state: "deactivated"})
+    |> Repo.update()
+  end
+
+  def update_user_state(%User{} = user, "verified") do
+    user
+    |> User.changeset(%{state: "verified"})
+    |> Repo.update()
   end
 end

@@ -2,17 +2,19 @@ defmodule IOSAppBackOffice.Accounts do
   alias IOSAppBackOffice.Admin
   alias IOSAppBackOffice.Repo
 
-  def compare_credentials(%{"email"=> email, "password"=> password}) do
+  def compare_credentials(%{"email" => email, "password" => password}) do
     get_admin_by_email(email)
     |> case do
       %Admin{} = admin ->
         admin
-          |> compare_password(password)
-          |> case do
-            true -> {:ok, admin}
-            _ -> {:error, :admin_not_found}
-          end
-      _ -> {:error, :admin_not_found}
+        |> compare_password(password)
+        |> case do
+          true -> {:ok, admin}
+          _ -> {:error, :admin_not_found}
+        end
+
+      _ ->
+        {:error, :admin_not_found}
     end
   end
 

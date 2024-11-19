@@ -21,7 +21,7 @@ defmodule IOSAppBackOffice.User do
 
   def changeset(%User{} = user, params \\ %{}) do
     user
-    |> cast(params, [:first_name, :last_name, :date_of_birth])
+    |> cast(params, [:first_name, :last_name, :date_of_birth, :state])
     |> cast_assoc(:address, with: &Address.changeset/2)
   end
 end

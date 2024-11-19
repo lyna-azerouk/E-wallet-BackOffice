@@ -3,14 +3,14 @@ defmodule IOSAppBackOfficeWeb.CustomComponenetLive do
 
   def user_resume(assigns) do
     ~H"""
-    <tbody class ="text-gray-500">
+    <tbody class="text-gray-500">
       <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-        <p class="whitespace-no-wrap"> <%= @user.id %> </p>
+        <p class="whitespace-no-wrap"><%= @user.id %></p>
       </td>
       <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
         <div class="flex items-center">
           <div class="ml-3">
-            <p class="whitespace-no-wrap"> <%= @user.email %> </p>
+            <p class="whitespace-no-wrap"><%= @user.email %></p>
           </div>
         </div>
       </td>
@@ -19,7 +19,7 @@ defmodule IOSAppBackOfficeWeb.CustomComponenetLive do
       </td>
       <td class="border-b border-gray-200 bg-white px-5 py-3 text-sm">
         <p class="whitespace-no-wrap">
-         <.badge state={@user.state}/>
+          <.badge state={@user.state} />
         </p>
       </td>
       <td class="w-1/12 whitespace-no-wrap">
@@ -31,23 +31,30 @@ defmodule IOSAppBackOfficeWeb.CustomComponenetLive do
 
   def user_ligne_show(assigns) do
     ~H"""
-      <div class="py-2 sm:py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt class="text-sm font-medium text-gray-500">
-          <%= @property %>
-        </dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
-          <%= if @edit_property && @property_name_to_edit == @property do %>
-            <input type="text" value={@value} phx-blur="save_property" phx-change="save_property" class="border-gray-300 rounded-md px-2 shadow-md" phx-value-property_name={@property} />
-          <% else %>
-            <%= @value %>
-          <% end %>
-        </dd>
-        <dd class="flex justify-end items-center">
-         <button phx-click="edit_property", phx-value-property_name_to_edit={@property}>
-           <Heroicons.icon name="pencil-square" type="outline" class="h-4 w-4 text-blue-500" />
+    <div class="py-2 sm:py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        <%= @property %>
+      </dt>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
+        <%= if @edit_property && @property_name_to_edit == @property do %>
+          <input
+            type="text"
+            value={@value}
+            phx-blur="save_property"
+            phx-change="save_property"
+            class="border-gray-300 rounded-md px-2 shadow-md"
+            phx-value-property_name={@property}
+          />
+        <% else %>
+          <%= @value %>
+        <% end %>
+      </dd>
+      <dd class="flex justify-end items-center">
+        <button phx-click="edit_property" , phx-value-property_name_to_edit={@property}>
+          <Heroicons.icon name="pencil-square" type="outline" class="h-4 w-4 text-blue-500" />
         </button>
-        </dd>
-      </div>
+      </dd>
+    </div>
     """
   end
 
@@ -67,4 +74,5 @@ defmodule IOSAppBackOfficeWeb.CustomComponenetLive do
 
   defp color_class("verified"), do: "bg-green-400"
   defp color_class("suspended"), do: "bg-red-600"
+  defp color_class(nil), do: "-"
 end

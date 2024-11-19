@@ -15,7 +15,6 @@ defmodule IOSAppBackOffice.Address do
     has_one :user, User
   end
 
-
   def changeset(%Address{} = address, params \\ %{}) do
     address
     |> cast(params, [:country, :city, :region, :postal_code, :street])

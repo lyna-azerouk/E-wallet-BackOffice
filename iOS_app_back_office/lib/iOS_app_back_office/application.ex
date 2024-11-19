@@ -10,7 +10,8 @@ defmodule IOSAppBackOffice.Application do
     children = [
       IOSAppBackOfficeWeb.Telemetry,
       IOSAppBackOffice.Repo,
-      {DNSCluster, query: Application.get_env(:iOS_app_back_office, :dns_cluster_query) || :ignore},
+      {DNSCluster,
+       query: Application.get_env(:iOS_app_back_office, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: IOSAppBackOffice.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: IOSAppBackOffice.Finch},
