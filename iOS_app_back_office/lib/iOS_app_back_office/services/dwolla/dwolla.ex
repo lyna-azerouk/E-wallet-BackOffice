@@ -4,7 +4,7 @@ defmodule IOSAppBackOffice.Services.Dwolla.Dwolla do
 
   def update_custumer_state(%User{dwolla_id: dwolla_id} = user, status)
       when not is_nil(dwolla_id) do
-    client = Client.new("0i5tIvfIasQJvIUifM9vbFgUGmygGhzBGafYqxJD2qDBhpUpJt")
+    client = Client.new(get_token())
 
     client = %{
       client
@@ -15,7 +15,7 @@ defmodule IOSAppBackOffice.Services.Dwolla.Dwolla do
     Finch.build(:post, client.api_base_url, client.headers, client.body)
     |> Finch.request(IOSAppBackOffice.Finch)
     |> case do
-      {:ok, %Finch.Response{}} ->
+      {:ok, %Finch.Response{status: 200}} ->
         {:ok, user}
 
       _ ->
@@ -23,10 +23,10 @@ defmodule IOSAppBackOffice.Services.Dwolla.Dwolla do
     end
   end
 
-  def update_custumer_state(_), do: {:error, ""}
+  def update_custumer_state(_, _), do: {:error, ""}
 
   def update_user(%User{dwolla_id: dwolla_id} = user, params) when not is_nil(dwolla_id) do
-    client = Client.new("SHclrsKfdYziUtlCczsJgzWXfA98QrhQiexhOF8BgOkWrLaZpt")
+    client = Client.new(get_token())
 
     client = %{
       client
@@ -40,10 +40,25 @@ defmodule IOSAppBackOffice.Services.Dwolla.Dwolla do
       {:ok, %Finch.Response{}} ->
         {:ok, user}
 
-      response -> IO.inspect(response)
+      _ ->
         {:error, "error occured while updating the user state"}
     end
   end
 
   def update_user(_, _), do: {:error, ""}
+
+  defp get_token() do
+    client = Client.new()
+
+    Finch.build(:post, client.api_base_url, client.headers, client.body)
+    |> Finch.request(IOSAppBackOffice.Finch)
+    |> case do
+      {:ok, %Finch.Response{status: 200, body: body}} ->
+        {:ok, %{"access_token" => access_token}} = Jason.decode(body)
+        access_token
+
+      _ ->
+        {:error, "error occured while updating the user state"}
+    end
+  end
 end

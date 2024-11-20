@@ -83,10 +83,10 @@ defmodule IOSAppBackOfficeWeb.UserShowLive do
     {:noreply, socket}
   end
 
-  def handle_event("desactivated", _, socket) do
+  def handle_event("deactivated", _, socket) do
     socket =
       socket.assigns.user
-      |> Users.update_user_state("desactivated")
+      |> Users.update_user_state("deactivated")
       |> case do
         {:ok, user} ->
           socket |> assign(:user, user)
@@ -101,7 +101,7 @@ defmodule IOSAppBackOfficeWeb.UserShowLive do
 
   def render(%{user: user} = assigns) when not is_nil(user) do
     ~H"""
-    <.navbar/>
+    <.navbar />
     <div class="p-6">
       <div class="bg-white shadow-lg rounded-lg border w-1/2 p-4">
         <div class="px-4 py-4 sm:px-6 flex items-center justify-between">
@@ -170,7 +170,7 @@ defmodule IOSAppBackOfficeWeb.UserShowLive do
           <button
             type="button"
             ,
-            phx-click="desactivated"
+            phx-click="deactivated"
             ,
             class="bg-blue-400 hover:bg-red-600 text-white font-medium py-2 px-2 rounded-md shadow-md flex items-center transition duration-300 ease-in-out mt-2"
           >

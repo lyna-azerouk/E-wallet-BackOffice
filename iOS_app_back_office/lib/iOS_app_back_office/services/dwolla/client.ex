@@ -4,17 +4,6 @@ defmodule IOSAppBackOffice.Services.Dwolla.Client do
             headers: nil,
             body: nil
 
-  # def new do
-  #   %__MODULE__{
-  #     api_base_url: "https://api-sandbox.dwolla.com/token",
-  #     headers: [
-  #       {"Content-Type", "application/json"},
-  #       {"Accept", "application/json"},
-  #       {"Authorization", "Basic #{encode_credentials()}"}
-  #     ]
-  #   }
-  # end
-
   def new(token) do
     %__MODULE__{
       api_base_url: "https://api-sandbox.dwolla.com/",
@@ -27,8 +16,20 @@ defmodule IOSAppBackOffice.Services.Dwolla.Client do
     }
   end
 
-  defp encode_credentials() do
-    credentials =
-      "IEo2kvbFJ1mwwHUYqFZ30shh7iZxJ5ATaZiDyEmNgqPtltuQ7T:IEo2kvbFJ1mwwHUYqFZ30shh7iZxJ5ATaZiDyEmNgqPtltuQ7T"
+  def new do
+    %__MODULE__{
+      api_base_url: "https://api-sandbox.dwolla.com/token",
+      headers: [
+        {"Content-Type", "application/x-www-form-urlencoded"},
+        {"Authorization", "Basic #{get_credentials()}"}
+      ],
+      body: "grant_type=client_credentials"
+    }
+  end
+
+  defp get_credentials() do
+    "#{System.get_env("DWOLLA_CLIENT_ID")}:#{System.get_env("DWOLLA_SECRET_KEY")}"
+    |> IO.inspect()
+    |> Base.encode64()
   end
 end

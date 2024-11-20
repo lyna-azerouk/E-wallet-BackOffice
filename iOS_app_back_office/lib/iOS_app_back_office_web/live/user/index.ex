@@ -38,56 +38,53 @@ defmodule IOSAppBackOfficeWeb.UserIndexLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <.navbar/>
-    <div class="flex" >
-      <.menu/>
-      <div class="overflow-y-hidden rounded-lg mt-6 w-2/3">
-        <div class="overflow-x-auto rounded">
-          <table class="w-full">
-            <thead>
-              <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
-                <th class="px-5 py-3">ID</th>
-                <th class="px-5 py-3">Email</th>
-                <th class="px-5 py-3">User Role</th>
-                <th class="px-5 py-3">Status</th>
-                <th class="px-5 py-3">Actions</th>
-              </tr>
-            </thead>
-            <%= for user <- @users_paginated.entries do %>
-              <.user_resume user={user}></.user_resume>
-            <% end %>
-          </table>
-          <nav class="border-t border-gray-200 center">
-            <ul class="flex my-2">
-              <%= for idx <- Enum.to_list(1..@users_paginated.total_pages) do %>
-                <li>
-                  <a
-                    class={"px-2 py-2 " <> if @users_paginated.page_number == idx, do: " pointer-events-none text-gray-600", else: ""}
-                    href="#"
-                    ,
-                    phx-click="nav"
-                    ,
-                    phx-value-page={idx}
-                  >
-                    <%= idx %>
-                  </a>
-                </li>
-              <% end %>
+    <.navbar />
+    <div class="overflow-y-hidden rounded-lg mt-6 p-10 items-center jutify-center">
+      <div class="overflow-x-auto rounded">
+        <table class="w-full">
+          <thead>
+            <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
+              <th class="px-5 py-3">ID</th>
+              <th class="px-5 py-3">Email</th>
+              <th class="px-5 py-3">User Role</th>
+              <th class="px-5 py-3">Status</th>
+              <th class="px-5 py-3">Actions</th>
+            </tr>
+          </thead>
+          <%= for user <- @users_paginated.entries do %>
+            <.user_resume user={user}></.user_resume>
+          <% end %>
+        </table>
+        <nav class="items-center justify-center mt-8">
+          <ul class="flex items-center -space-x-px h-10 text-sm items-center justify-center">
+            <%= for idx <- Enum.to_list(1..@users_paginated.total_pages) do %>
               <li>
                 <a
-                  class={"px-2 py-2 " <> if @users_paginated.page_number >= @users_paginated.total_pages, do: " pointer-events-none text-gray-600", else: ""}
+                  class={"flex items-center justify-center px-4 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white " <> if @users_paginated.page_number == idx, do: " pointer-events-none text-gray-600", else: ""}
                   href="#"
                   ,
                   phx-click="nav"
                   ,
-                  phx-value-page={@users_paginated.page_number + 1}
+                  phx-value-page={idx}
                 >
-                  Next
+                  <%= idx %>
                 </a>
               </li>
-            </ul>
-          </nav>
-        </div>
+            <% end %>
+            <li>
+              <a
+                class={"flex items-center justify-center px-4 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" <> if @users_paginated.page_number >= @users_paginated.total_pages, do: " pointer-events-none text-gray-600", else: ""}
+                href="#"
+                ,
+                phx-click="nav"
+                ,
+                phx-value-page={@users_paginated.page_number + 1}
+              >
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
     """

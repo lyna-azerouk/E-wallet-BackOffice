@@ -55,7 +55,7 @@ defmodule IOSAppBackOffice.Users do
     end
   end
 
-  def update_user_state(%User{} = user, "desactivated" = state) do
+  def update_user_state(%User{} = user, "deactivated" = state) do
     user
     |> Dwolla.update_custumer_state(state)
     |> case do
