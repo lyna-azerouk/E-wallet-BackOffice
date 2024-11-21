@@ -14,12 +14,17 @@ defmodule IOSAppBackOfficeWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :admin do
+    plug IOSAppBackOfficeWeb.Plugs.Auth
+  end
+
   scope "/admin", IOSAppBackOfficeWeb do
     pipe_through :browser
 
     get "/login", AdminController, :show
     post "/login", AdminController, :login
 
+    pipe_through :admin
     live "/users", UserIndexLive, :index
     live "/users/:id", UserShowLive, :show
   end

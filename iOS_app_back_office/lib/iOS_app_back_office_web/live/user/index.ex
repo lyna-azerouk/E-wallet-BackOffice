@@ -5,11 +5,7 @@ defmodule IOSAppBackOfficeWeb.UserIndexLive do
   alias IOSAppBackOffice.Users
 
   @impl true
-  def mount(_params, %{"admin" => admin}, socket) do
-    socket
-    |> assign(admin: admin)
-    |> assign(conn: socket)
-
+  def mount(_params, %{"admin" => _admin}, socket) do
     {:ok, socket}
   end
 

@@ -89,6 +89,7 @@ defmodule IOSAppBackOfficeWeb do
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
+      alias IOSAppBackOfficeWeb.Router.Helpers, as: Routes
 
       # Routes generation with the ~p sigil
       unquote(verified_routes())

@@ -61,7 +61,8 @@ defmodule IOSAppBackOffice.MixProject do
       {:bandit, "~> 1.5"},
       {:bcrypt_elixir, "~> 3.0"},
       {:ex_heroicons, "~> 3.0.0"},
-      {:scrivener_ecto, "~> 2.7"}
+      {:scrivener_ecto, "~> 2.7"},
+      {:plug_cowboy, "~> 2.0"}
     ]
   end
 
