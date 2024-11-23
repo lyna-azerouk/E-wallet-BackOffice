@@ -25,8 +25,12 @@ defmodule IOSAppBackOfficeWeb.Router do
     post "/login", AdminController, :login
 
     pipe_through :admin
+    #User
     live "/users", UserIndexLive, :index
     live "/users/:id", UserShowLive, :show
+
+    #Wallet
+    live "wallets", WalletsIndexLive, :index
   end
 
   # Other scopes may use custom stacks.

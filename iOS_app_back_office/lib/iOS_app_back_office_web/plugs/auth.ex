@@ -10,8 +10,7 @@ defmodule IOSAppBackOfficeWeb.Plugs.Auth do
     verify_access!(conn)
   end
 
-  defp verify_access!(%Plug.Conn{ request_path: path} = conn) do
-    IO.inspect(path)
+  defp verify_access!(%Plug.Conn{ request_path: _path} = conn) do
     get_session(conn, :admin)
       |> case do
         %Admin{} -> conn
