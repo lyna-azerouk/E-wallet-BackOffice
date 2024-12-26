@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :iOS_app_back_office, IOSAppBackOffice.Repo,
-  username: "ecomerce_user",
-  password: "postgres",
-  hostname: "localhost",
-  database: "ecommerce_development",
+  username: System.get_env("DATA_BASE_USER_NAME") ,
+  password: System.get_env("DATA_BASE_PASSWORD"),
+  hostname: System.get_env("DATA_BASE_HOST_NAME"),
+  database: System.get_env("DATA_BASE_NAME"),
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

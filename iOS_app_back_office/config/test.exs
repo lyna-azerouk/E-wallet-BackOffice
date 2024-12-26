@@ -6,9 +6,9 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :iOS_app_back_office, IOSAppBackOffice.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
+  username: System.get_env("DATA_BASE_USER_NAME"),
+  password: System.get_env("DATA_BASE_PASSWORD"),
+  hostname: System.get_env("DATA_BASE_HOST_NAME"),
   database: "ios_app_back_office_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2
