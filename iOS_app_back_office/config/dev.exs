@@ -2,7 +2,7 @@ import Config
 
 # Configure your database
 config :iOS_app_back_office, IOSAppBackOffice.Repo,
-  username: System.get_env("DATA_BASE_USER_NAME") ,
+  username: System.get_env("DATA_BASE_USER_NAME"),
   password: System.get_env("DATA_BASE_PASSWORD"),
   hostname: System.get_env("DATA_BASE_HOST_NAME"),
   database: System.get_env("DATA_BASE_NAME"),

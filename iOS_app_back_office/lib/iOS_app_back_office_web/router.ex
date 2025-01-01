@@ -25,11 +25,11 @@ defmodule IOSAppBackOfficeWeb.Router do
     post "/login", AdminController, :login
 
     pipe_through :admin
-    #User
+    # User
     live "/users", UserIndexLive, :index
     live "/users/:id", UserShowLive, :show
 
-    #Wallet
+    # Wallet
     live "wallets", WalletsIndexLive, :index
   end
 

@@ -10,14 +10,17 @@ defmodule IOSAppBackOfficeWeb.Plugs.Auth do
     verify_access!(conn)
   end
 
-  defp verify_access!(%Plug.Conn{ request_path: _path} = conn) do
+  defp verify_access!(%Plug.Conn{request_path: _path} = conn) do
     get_session(conn, :admin)
-      |> case do
-        %Admin{} -> conn
-        _ ->   conn
+    |> case do
+      %Admin{} ->
+        conn
+
+      _ ->
+        conn
         |> put_flash(:error, "Unauthorized")
-        |> redirect(to:  "/admin/login")
-      end
+        |> redirect(to: "/admin/login")
+    end
   end
 
   defp verify_access!(conn),

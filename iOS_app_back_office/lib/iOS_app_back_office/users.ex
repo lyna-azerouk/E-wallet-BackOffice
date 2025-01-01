@@ -3,6 +3,7 @@ defmodule IOSAppBackOffice.Users do
   alias IOSAppBackOffice.Repo
   alias IOSAppBackOffice.User
   alias IOSAppBackOffice.Services.Dwolla.Dwolla
+  alias IOSAppBackOffice.Services.Docusign.Docusign
 
   def get_users() do
     User |> Repo.all()
@@ -67,5 +68,10 @@ defmodule IOSAppBackOffice.Users do
       {:error, _} = error ->
         error
     end
+  end
+
+  def send_document_to_sign_by_mail(%User{} = user) do
+    user
+    |> Docusign.create_envelope()
   end
 end

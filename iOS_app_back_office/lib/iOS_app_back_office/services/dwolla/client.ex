@@ -29,7 +29,6 @@ defmodule IOSAppBackOffice.Services.Dwolla.Client do
 
   defp get_credentials() do
     "#{System.get_env("DWOLLA_CLIENT_ID")}:#{System.get_env("DWOLLA_SECRET_KEY")}"
-    |> IO.inspect()
     |> Base.encode64()
   end
 end
