@@ -36,17 +36,18 @@ defmodule IOSAppBackOffice.Services.Docusign.Client do
       api_base_url: "https://demo.docusign.net/restapi/v2.1/accounts/#{account_id}/envelopes",
       headers: [
         {"Authorization", "Bearer #{bearer_token}"},
-        {"Accept", "application/json"}
+        {"Accept", "application/json"},
+        {"Content-Type", "application/json; charset=UTF-8"}
       ]
     }
   end
 
-  def get_encoded_secret_and_integration_key() do
+  defp get_encoded_secret_and_integration_key() do
     "#{get_integrator_key()}:#{get_secret_key()}"
     |> Base.encode64()
   end
 
-  def calculate_jwt_token do
+  defp calculate_jwt_token do
     rsa_private_jwk = JOSE.JWK.from_pem_file("rsa-2048.pem")
 
     jws = %{
@@ -69,23 +70,23 @@ defmodule IOSAppBackOffice.Services.Docusign.Client do
     assertion
   end
 
-  def get_api_account_id do
+  defp get_api_account_id do
     System.get_env("DOCUSIGN_API_ACCOUNT_ID")
   end
 
-  def get_user_id do
+  defp get_user_id do
     System.get_env("DOCUSIGN_USER_ID")
   end
 
-  def get_secret_key do
+  defp get_secret_key do
     System.get_env("DOCUSIGN_SECRET_KEY")
   end
 
-  def get_integrator_key do
+  defp get_integrator_key do
     System.get_env("DOCUSIGN_INTEGRATOR_KEY")
   end
 
-  def get_api_base_url do
+  defp get_api_base_url do
     System.get_env("DOCUSIGN_API_BASE_URL")
   end
 end

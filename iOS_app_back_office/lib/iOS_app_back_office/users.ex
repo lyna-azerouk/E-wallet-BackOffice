@@ -70,8 +70,8 @@ defmodule IOSAppBackOffice.Users do
     end
   end
 
-  def send_document_to_sign_by_mail(%User{} = user) do
-    user
-    |> Docusign.create_envelope()
+  def send_document_to_sign_by_mail(%User{} = user, admin) do
+    admin
+    |> Docusign.create_admin_docusign_view(user)
   end
 end

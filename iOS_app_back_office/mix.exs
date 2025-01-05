@@ -65,7 +65,8 @@ defmodule IOSAppBackOffice.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:guardian, "~> 2.3"},
       {:joken, "~> 2.6"},
-      {:jose, "~> 1.11"}
+      {:jose, "~> 1.11"},
+      {:httpoison, "~> 2.0"}
     ]
   end
 

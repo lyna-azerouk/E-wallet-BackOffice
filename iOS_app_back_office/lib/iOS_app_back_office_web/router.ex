@@ -28,6 +28,7 @@ defmodule IOSAppBackOfficeWeb.Router do
     # User
     live "/users", UserIndexLive, :index
     live "/users/:id", UserShowLive, :show
+    live "/users/:id/docusign", UserDocusignShowLive, :show
 
     # Wallet
     live "wallets", WalletsIndexLive, :index
